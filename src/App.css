@@ -1,0 +1,44 @@
+*{
+    background-color: gray;
+    margin: 0;
+    padding: 0;
+}
+nav{
+    position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   height: 80px;
+   background-color: black;
+
+}
+img{
+    width: 50px;
+    border-radius: 50%;
+}
+nav > h1{
+    margin: 0;
+    text-align: center;
+    background: none;
+    color: rgb(211, 211, 211)
+}
+
+nav > button{
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    
+}
+
+.feed-container{
+    width: 200px;
+    border: 5px solid black;
+    background-color: red;
+    border-radius: 5px;
+    
+}
+.profile-info{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
