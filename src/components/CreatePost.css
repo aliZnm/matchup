@@ -1,0 +1,39 @@
+.modal-content > label {
+    display: inline;
+    width: 100%;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+
+input{
+    margin-top: 7px;
+}
+
+
+.mic-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+
+}
+
+.modal-content input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
+.mic-row label {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+
+
+

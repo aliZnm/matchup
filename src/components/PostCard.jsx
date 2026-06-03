@@ -1,4 +1,4 @@
-
+import './PostCard.css'
 export default function PostCard(props){
     return(
         <div className="feed-container">
