@@ -29,6 +29,7 @@ export default function Feed(){
     }
 
 
+
       const postElements = posts.map((post, index) => {
         return  <PostCard 
         key={index}
@@ -52,7 +53,7 @@ export default function Feed(){
         {showForm && 
         <div className="modal-overlay">
             <div className="modal-content">
-                <CreatePost closeForm={closeForm}/>
+                <CreatePost closeForm={closeForm} />
             </div>
         </div>
         }

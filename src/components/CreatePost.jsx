@@ -14,7 +14,10 @@ export default function CreatePost(props){
     })
     } 
     return(
-        <form action={handleSubmit}>
+
+        <div className="post-form-container">
+            <button onClick={props.closeForm}>X</button>
+            <form action={handleSubmit}>
             <label>Game Name</label>
             <input type="text" name="gameName" placeholder="e.g. Valorant"/>
             
@@ -32,5 +35,6 @@ export default function CreatePost(props){
 
             <button onClick={props.closeForm}>Post</button>
         </form>
+        </div>
     )
 }

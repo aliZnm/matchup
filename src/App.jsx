@@ -1,19 +1,48 @@
 import Navbar from './components/Navbar'
 import Feed from './components/Feed'
 import { useEffect, useState } from 'react'
-import { auth } from './firebase'
+import { auth, db } from './firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import Login from './components/Login'
 import './App.css'
+import { doc, getDoc } from 'firebase/firestore'
+import CreateUsername from './components/CreateUsername'
 
 export default function App() {
   const [user, setUser] = useState({displayName: "Abdul"});
+  const [loading, setLoading] = useState(true);
+  const [needsUsername, setNeedsUsername] = useState(false);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => setUser(currentUser))
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setUser(currentUser);
+      if(currentUser){
+        const userRef = doc(db, "users", currentUser.uid);
+        const userSnap = await getDoc(userRef);
+
+        setNeedsUsername(!userSnap.exists());
+      }
+
+      setLoading(false)
+    });
+    return unsubscribe;
   }, []);
 
-  
+  if(loading){
+    return <h1>Loading...</h1>;
+  }
+
+  if(!user){
+    return <Login />;
+  }
+
+  if(needsUsername){
+    return (
+    <CreateUsername 
+    user={user}
+    setNeedsUsername={setNeedsUsername}
+    />);
+  }
 
   
 

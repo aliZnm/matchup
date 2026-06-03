@@ -1,10 +1,9 @@
 import { auth, provider } from "../firebase.js";
 import { signInWithPopup } from "firebase/auth";
+
 export default function Login(){
-    
     async function handleSignIn(){
-        const result = await signInWithPopup(auth, provider)
-        console.log(result.user);
+        await signInWithPopup(auth, provider);
     }
 
     return(
