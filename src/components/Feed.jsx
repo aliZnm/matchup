@@ -53,6 +53,7 @@ export default function Feed(){
         {showForm && 
         <div className="modal-overlay">
             <div className="modal-content">
+                <button onClick={() => setShowForm(false)} className="close-btn">X</button>
                 <CreatePost closeForm={closeForm} />
             </div>
         </div>

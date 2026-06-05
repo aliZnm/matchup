@@ -12,11 +12,11 @@ export default function CreatePost(props){
         gameUsername: data.gameUsername,
         date: new Date().toLocaleDateString()
     })
+    props.closeForm()
     } 
     return(
 
         <div className="post-form-container">
-            <button onClick={props.closeForm}>X</button>
             <form action={handleSubmit}>
             <label>Game Name</label>
             <input type="text" name="gameName" placeholder="e.g. Valorant"/>
@@ -33,7 +33,7 @@ export default function CreatePost(props){
                 <input type="checkbox" name="mic" value="Yes" defaultChecked/>
             </div>
 
-            <button onClick={props.closeForm}>Post</button>
+            <button type="submit">Post</button>
         </form>
         </div>
     )
