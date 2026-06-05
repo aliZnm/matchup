@@ -5,10 +5,11 @@ import { useState, useEffect } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import CreatePost from "./CreatePost";
 import './Feed.css'
-export default function Feed(){
-
+export default function Feed({ user, username }){
     const [posts, setPosts] = useState([]);
     const [showForm, setShowForm] = useState(false);
+    const [activeTab, setActiveTab] = useState("explore");
+
     useEffect(() =>{
         async function fetchPosts(){
             onSnapshot(collection(db, "posts"), (snapshot) =>{
@@ -28,9 +29,13 @@ export default function Feed(){
         setShowForm(false);
     }
 
+    const filteredPosts = posts.filter(post => {
+        if(activeTab === "myPosts") return post.uid === user.uid
+        return true
+    })
 
 
-      const postElements = posts.map((post, index) => {
+      const postElements = filteredPosts.map((post, index) => {
         return  <PostCard 
         key={index}
         profilePic={post.profilePic}
@@ -54,10 +59,19 @@ export default function Feed(){
         <div className="modal-overlay">
             <div className="modal-content">
                 <button onClick={() => setShowForm(false)} className="close-btn">X</button>
-                <CreatePost closeForm={closeForm} />
+                <CreatePost 
+                closeForm={closeForm}
+                user={user} 
+                username={username}/>
             </div>
         </div>
         }
+        <div className="tabs">
+            <button onClick={() => setActiveTab("explore")}>Explore</button>
+            <button onClick={() => setActiveTab("friends")}>Friends</button>
+            <button onClick={() => setActiveTab("myPosts")}>My Posts</button>
+        </div>
+
         <div className="feed">
             {postElements}
         </div>

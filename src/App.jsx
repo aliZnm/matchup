@@ -12,6 +12,7 @@ export default function App() {
   const [user, setUser] = useState({displayName: "Abdul"});
   const [loading, setLoading] = useState(true);
   const [needsUsername, setNeedsUsername] = useState(false);
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -19,7 +20,12 @@ export default function App() {
       if(currentUser){
         const userRef = doc(db, "users", currentUser.uid);
         const userSnap = await getDoc(userRef);
+       
+        if(userSnap.exists()){
+          setUsername(userSnap.data().username)
 
+      
+        }
         setNeedsUsername(!userSnap.exists());
       }
 
@@ -50,7 +56,9 @@ export default function App() {
   return (
    <>
    <Navbar />
-   <Feed />
+   <Feed 
+   user={user}
+   username={username}/>
    </>
   )
 }

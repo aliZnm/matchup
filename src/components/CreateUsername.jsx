@@ -4,13 +4,13 @@ import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import './CreateUsername.css'
 
 
-export default function CreateUsername({ user, setNeedsUsername }){
-    const [username, setUsername] = useState("");
+export default function CreateUsername({ user, setNeedsUsername, username }){
+    const [usernameInput, setUsernameInput] = useState("");
 
     async function handleSubmit(e) {
         e.preventDefault();
         await setDoc(doc(db, "users", user.uid), {
-            username,
+            username: usernameInput,
             email: user.email,
             photoURL: user.photoURL,
             createdAt: serverTimestamp()
@@ -28,7 +28,7 @@ export default function CreateUsername({ user, setNeedsUsername }){
                 <form onSubmit={handleSubmit}>
                     <div className="input-wrapper">
                         <span>@</span>
-                        <input type="text" onChange={(e) => setUsername(e.target.value)} placeholder="username" />
+                        <input type="text" onChange={(e) => setUsernameInput(e.target.value)} placeholder="username" />
                     </div>
                   <button type="submit">
                     Continue

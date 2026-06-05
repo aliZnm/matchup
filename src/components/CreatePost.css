@@ -40,3 +40,11 @@ input{
 .post-form-container{
     padding-top: 15px;
 }
+
+.error-message{
+    color: #c46262;
+    font-size: 0.80rem;
+    margin-top: 3px;
+    margin-bottom: 15px;
+    margin-left: 3px; 
+}
