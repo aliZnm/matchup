@@ -1,5 +1,5 @@
 import { db } from "../firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import './CreatePost.css'
 import { useState } from "react";
 export default function CreatePost({ user, username, closeForm }){
@@ -22,7 +22,7 @@ export default function CreatePost({ user, username, closeForm }){
         level: data.level,
         mic: data.mic,
         gameUsername: data.gameUsername,
-        date: new Date().toLocaleDateString()
+        createdAt: serverTimestamp()
     })
     closeForm()
     } 

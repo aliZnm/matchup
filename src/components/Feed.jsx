@@ -16,7 +16,11 @@ export default function Feed({ user, username }){
                 const postsData = snapshot.docs.map((doc) => ({
                     id: doc.id,
                     ...doc.data()
-                }))
+                })).sort((a, b) => {
+                    const timeA = a.createdAt?.seconds || 0
+                const timeB = b.createdAt?.seconds || 0
+            return timeB - timeA
+        })
                 setPosts(postsData)
             })
             
@@ -32,7 +36,9 @@ export default function Feed({ user, username }){
     const filteredPosts = posts.filter(post => {
         if(activeTab === "myPosts") return post.uid === user.uid
         return true
-    })
+    });
+
+   
 
 
       const postElements = filteredPosts.map((post, index) => {
@@ -44,7 +50,7 @@ export default function Feed({ user, username }){
         level={post.level}
         mic={post.mic ? "yes" : "no"}
         gameUsername={post.gameUsername}
-        date={post.date}
+        date={post.createdAt ? new Date(post.createdAt.seconds * 1000).toLocaleDateString() : ""}
         />
       });
 
