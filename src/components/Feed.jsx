@@ -51,6 +51,9 @@ export default function Feed({ user, username }){
         mic={post.mic ? "yes" : "no"}
         gameUsername={post.gameUsername}
         date={post.createdAt ? new Date(post.createdAt.seconds * 1000).toLocaleDateString() : ""}
+        activeTab={activeTab}
+        uid={post.uid}
+        currentUserUid={user.uid}
         />
       });
 
