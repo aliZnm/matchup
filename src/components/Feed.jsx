@@ -1,5 +1,4 @@
 import PostCard from "./PostCard";
-import Profile from "../assets/profile.jpg"
 import { db } from "../firebase";
 import { useState, useEffect } from "react";
 import { collection, onSnapshot } from "firebase/firestore";

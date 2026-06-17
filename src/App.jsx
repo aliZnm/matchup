@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Feed from './components/Feed'
 import { useEffect, useState } from 'react'
@@ -7,12 +8,15 @@ import Login from './components/Login'
 import './App.css'
 import { doc, getDoc } from 'firebase/firestore'
 import CreateUsername from './components/CreateUsername'
+import Profile from './components/Profile'
 
 export default function App() {
   const [user, setUser] = useState({displayName: "Abdul"});
   const [loading, setLoading] = useState(true);
   const [needsUsername, setNeedsUsername] = useState(false);
   const [username, setUsername] = useState("");
+  const [selectedUser, setSelectedUser] = useState(null);
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -56,9 +60,11 @@ export default function App() {
   return (
    <>
    <Navbar />
-   <Feed 
-   user={user}
-   username={username}/>
+   <Routes>
+      <Route path="/" element={<Feed user={user} username={username}/>} />
+      <Route path="/profile/:uid" element={<Profile />}/>
+   </Routes>
+
    </>
   )
 }

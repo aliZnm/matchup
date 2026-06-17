@@ -2,10 +2,16 @@ import { useState } from 'react'
 import './PostCard.css'
 import { db } from '../firebase';
 import { doc, deleteDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function PostCard(props){
 
     const [showMenu, setShowMenu] = useState(false);
+    const naviagte = useNavigate()
+
+
+
     function toggleShowMenu(){
         setShowMenu(prev => !prev);
     }
@@ -17,7 +23,7 @@ export default function PostCard(props){
 
     return(
         <div className="feed-container" onClick={() => setShowMenu(false)}>
-            <div className="profile-info">
+            <div className="profile-info" onClick={() => naviagte(`/profile/${props.uid}`)}>
                 <img src={props.profilePic} />
                 <h2>{props.username}</h2>
             </div>
