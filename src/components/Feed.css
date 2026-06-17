@@ -71,3 +71,48 @@
     font-weight: 600;
     width: 100%;
 }
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    max-width: 500px;
+    margin: 0 auto 16px auto;
+}
+
+.tabs button {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.tabs button:hover {
+    border-color: var(--accent);
+    color: var(--text);
+}
+
+.active-tab {
+    background-color: var(--accent) !important;
+    color: var(--text) !important;
+    border-color: var(--accent) !important;
+}
+
+.feed-container-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}

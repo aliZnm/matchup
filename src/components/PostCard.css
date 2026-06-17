@@ -90,3 +90,17 @@
     background-color: var(--border);
 }
 
+@media (max-width: 600px) {
+    .feed-container {
+        border-radius: 8px;
+        padding: 12px;
+    }
+
+    .feed-content h1 {
+        font-size: 1.1rem;
+    }
+
+    .feed-content h2 {
+        font-size: 0.85rem;
+    }
+}

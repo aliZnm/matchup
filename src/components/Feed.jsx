@@ -75,14 +75,16 @@ export default function Feed({ user, username }){
             </div>
         </div>
         }
-        <div className="tabs">
-            <button onClick={() => setActiveTab("explore")}>Explore</button>
-            <button onClick={() => setActiveTab("friends")}>Friends</button>
-            <button onClick={() => setActiveTab("myPosts")}>My Posts</button>
-        </div>
+        <div className="feed-container-wrapper">
+            <div className="tabs">
+              <button className={activeTab === "explore" ? "active-tab" : ""} onClick={() => setActiveTab("explore")}>Explore</button>
+              <button className={activeTab === "friends" ? "active-tab" : ""} onClick={() => setActiveTab("friends")}>Friends</button>
+              <button className={activeTab === "myPosts" ? "active-tab" : ""} onClick={() => setActiveTab("myPosts")}>My Posts</button>
+            </div>
 
-        <div className="feed">
-            {postElements}
+             <div className="feed">
+               {postElements}
+            </div>
         </div>
         </>
       )
