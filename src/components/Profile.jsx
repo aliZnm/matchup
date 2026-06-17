@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDocs, getDoc, query, where } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import ProfilePic from "../assets/default-avatar.jpg"
 import './Profile.css'
@@ -8,6 +8,7 @@ export default function Profile(){
     const { uid } = useParams()
     const navigate = useNavigate()
     const [profileData, setProfileData] = useState(null);
+    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         async function fetchProfile(){
@@ -17,7 +18,17 @@ export default function Profile(){
                 setProfileData(userSnap.data())
             }
         }
+        async function fetchPosts(){
+            const q = query(collection(db, "posts"), where("uid", "==", uid))
+            const snapshot = await getDocs(q)
+            const postsData = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            setPosts(postsData)
+        }
         fetchProfile()
+        fetchPosts()
     }, [uid])
     if(!profileData) return <h1>Loading..</h1>
     return(
