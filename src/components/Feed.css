@@ -116,3 +116,10 @@
     gap: 8px;
     margin-bottom: 16px;
 }
+
+.no-posts-text {
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 24px;
+    font-size: 0.9rem;
+}

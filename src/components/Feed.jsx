@@ -54,6 +54,7 @@ export default function Feed({ user, username }){
         activeTab={activeTab}
         uid={post.uid}
         currentUserUid={user.uid}
+        id={post.id}
         />
       });
 
@@ -83,8 +84,11 @@ export default function Feed({ user, username }){
             </div>
 
              <div className="feed">
-               {postElements}
+               {activeTab === "myPosts" && filteredPosts.length === 0
+               ? <p className="no-posts-text">You haven't made any posts yet.</p>
+                : postElements}
             </div>
+
         </div>
         </>
       )

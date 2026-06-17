@@ -1,10 +1,18 @@
 import { useState } from 'react'
 import './PostCard.css'
+import { db } from '../firebase';
+import { doc, deleteDoc } from 'firebase/firestore';
+
 export default function PostCard(props){
 
     const [showMenu, setShowMenu] = useState(false);
     function toggleShowMenu(){
         setShowMenu(prev => !prev);
+    }
+
+
+    function handleDelete(){
+        deleteDoc(doc(db, "posts", props.id));
     }
 
     return(
@@ -19,7 +27,7 @@ export default function PostCard(props){
             {showMenu &&
                 <div className='menu-btns-container'>
                     <button>Hide</button>
-                    <button style={{color: "#F08080"}}>Delete</button>
+                    <button onClick={handleDelete} style={{color: "#F08080"}}>Delete</button>
                 </div>}
             <div className="feed-content">
                 <h1>{props.gameName}</h1>
