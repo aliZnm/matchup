@@ -62,3 +62,11 @@
     padding: 6px 12px;
     
 }
+
+.profile-posts {
+    margin-top: 24px;
+}
+
+.profile-posts h2 {
+    margin-bottom: 16px;
+}
