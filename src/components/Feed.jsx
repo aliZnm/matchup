@@ -54,6 +54,7 @@ export default function Feed({ user, username }){
         uid={post.uid}
         currentUserUid={user.uid}
         id={post.id}
+        likes={post.likes}
         />
       });
 

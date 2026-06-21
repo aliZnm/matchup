@@ -104,3 +104,35 @@
         font-size: 0.85rem;
     }
 }
+
+
+.post-actions {
+    display: flex;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+.like-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.like-btn:hover {
+    background-color: var(--border);
+}
+
+.like-btn img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
