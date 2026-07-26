@@ -1,15 +1,18 @@
 import { useState } from 'react'
 import './PostCard.css'
 import { db } from '../firebase';
-import { doc, deleteDoc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
+import { doc, deleteDoc, updateDoc, arrayUnion, arrayRemove, addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import FilledHeart from '../assets/filledHeart.png'
 import UnfilledHeart from '../assets/unfilledHeart.png'
+import Comments from '../assets/comments.png'
+
 
 export default function PostCard(props){
 
     const [showMenu, setShowMenu] = useState(false);
-    const naviagte = useNavigate()
+    const naviagte = useNavigate();
+    const [showComments, setShowComments] = useState(false);
 
     async function handleLike(e){
         e.stopPropagation()
@@ -27,6 +30,9 @@ export default function PostCard(props){
     }
 
 
+   
+
+
     function toggleShowMenu(){
         setShowMenu(prev => !prev);
     }
@@ -34,6 +40,17 @@ export default function PostCard(props){
 
     function handleDelete(){
         deleteDoc(doc(db, "posts", props.id));
+    }
+
+    async function handleCommentSubmit(formData){
+        const comment = formData.get("comment")
+        if(!comment) return
+        await addDoc(collection(db, "post", props.id, "comments"), {
+            text: comment,
+            username: props.username,
+            uid: props.currentUserUid,
+            createdAt: serverTimestamp()
+        })
     }
 
     return(
@@ -62,7 +79,19 @@ export default function PostCard(props){
                     <img src={props.likes?.includes(props.currentUserUid) ? FilledHeart : UnfilledHeart} alt="Like" />
                     {props.likes?.length || 0}
                 </button>
+                <button onClick={(e) => {e.stopPropagation(); setShowComments(prev => !prev)}} className='comments-btn'>
+                    <img src={Comments} alt="comments" />
+                    {props.commentCount || 0}
+                </button>
             </div>
+
+            {showComments && 
+            <div className='comments-section' onClick={e => e.stopPropagation()}>
+                <form action={handleCommentSubmit}>
+                    <input type="text" name="comment" placeholder='Write a comment...'/>
+                    <button type='submit'>Post</button>
+                </form>
+            </div>}
         </div>
     )
 }
