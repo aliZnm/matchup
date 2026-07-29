@@ -1,18 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './PostCard.css'
 import { db } from '../firebase';
-import { doc, deleteDoc, updateDoc, arrayUnion, arrayRemove, addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { doc, deleteDoc, updateDoc, arrayUnion, arrayRemove, addDoc, collection, serverTimestamp, onSnapshot } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import FilledHeart from '../assets/filledHeart.png'
 import UnfilledHeart from '../assets/unfilledHeart.png'
 import Comments from '../assets/comments.png'
 
-
 export default function PostCard(props){
 
     const [showMenu, setShowMenu] = useState(false);
     const naviagte = useNavigate();
-    const [showComments, setShowComments] = useState(false);
+    const [comments, setComments] = useState([]);
+
 
     async function handleLike(e){
         e.stopPropagation()
@@ -42,16 +42,20 @@ export default function PostCard(props){
         deleteDoc(doc(db, "posts", props.id));
     }
 
-    async function handleCommentSubmit(formData){
-        const comment = formData.get("comment")
-        if(!comment) return
-        await addDoc(collection(db, "post", props.id, "comments"), {
-            text: comment,
-            username: props.username,
-            uid: props.currentUserUid,
-            createdAt: serverTimestamp()
-        })
-    }
+
+    useEffect(() => {
+        const unsubscribe = onSnapshot(
+            collection(db, "posts", props.id, "comments"),
+            (snapshot) =>{
+                const commentsData = snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }))
+                setComments(commentsData)
+            }
+        )
+        return unsubscribe
+    }, [])
 
     return(
         <div className="feed-container" onClick={() => setShowMenu(false)}>
@@ -79,19 +83,29 @@ export default function PostCard(props){
                     <img src={props.likes?.includes(props.currentUserUid) ? FilledHeart : UnfilledHeart} alt="Like" />
                     {props.likes?.length || 0}
                 </button>
-                <button onClick={(e) => {e.stopPropagation(); setShowComments(prev => !prev)}} className='comments-btn'>
+                <button onClick={(e) => {e.stopPropagation(); naviagte(`/post/${props.id}`)}} className='comments-btn'>
                     <img src={Comments} alt="comments" />
                     {props.commentCount || 0}
                 </button>
             </div>
 
-            {showComments && 
-            <div className='comments-section' onClick={e => e.stopPropagation()}>
-                <form action={handleCommentSubmit}>
-                    <input type="text" name="comment" placeholder='Write a comment...'/>
-                    <button type='submit'>Post</button>
-                </form>
-            </div>}
+
+            <div className='comments-list'>
+                {comments.slice(0, 3).map((comment, index) => (
+                    <div key={index} className='comment-item'>
+                        <span className='comment-username'>@{comment.username}</span>
+                        <p>{comment.text}</p>
+                    </div>
+                ))}
+        
+                {comments.length > 3 &&
+                    <p className='view-all-comments' onClick={(e) => {e.stopPropagation(); naviagte(`/post/${props.id}`)}}>
+                        View all {comments.length} comments</p>
+                }
+            </div>
+
+           
+            
         </div>
     )
 }

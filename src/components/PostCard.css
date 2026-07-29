@@ -204,3 +204,44 @@
     font-size: 0.8rem;
     width: auto;
 }
+
+.comments-list {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.comment-item {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.comment-username {
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.comment-item p {
+    color: var(--text);
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+.no-comments {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 12px 0;
+}
+.view-all-comments {
+    color: var(--accent);
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.view-all-comments:hover {
+    text-decoration: underline;
+}

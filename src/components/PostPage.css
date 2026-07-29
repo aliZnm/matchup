@@ -1,0 +1,126 @@
+.post-page {
+    max-width: 500px;
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+.back-btn {
+    background-color: var(--border);
+    border: none;
+    color: var(--text);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+}
+
+.post-page-content {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.post-page-content h1 {
+    color: var(--accent);
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.post-page-content p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.comments-section {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.comments-section h2 {
+    color: var(--text);
+    font-size: 1rem;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.comment-item {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.comment-username {
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.comment-item p {
+    color: var(--text);
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 16px 0;
+}
+
+.comment-form {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+}
+
+.comment-form input {
+    flex: 1;
+    padding: 8px 12px;
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+}
+
+.comment-form button {
+    background-color: var(--accent);
+    color: var(--text);
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    width: auto;
+}
+
+.no-comments {
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 16px;
+    font-size: 0.9rem;
+}
+
+.comment-profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.comment-profile img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-text {
+    margin-left: 38px;
+    color: var(--text);
+    font-size: 0.9rem;
+}

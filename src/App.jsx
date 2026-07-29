@@ -9,6 +9,7 @@ import './App.css'
 import { doc, getDoc } from 'firebase/firestore'
 import CreateUsername from './components/CreateUsername'
 import Profile from './components/Profile'
+import PostPage from './components/PostPage'
 
 export default function App() {
   const [user, setUser] = useState({displayName: "Abdul"});
@@ -63,6 +64,7 @@ export default function App() {
    <Routes>
       <Route path="/" element={<Feed user={user} username={username}/>} />
       <Route path="/profile/:uid" element={<Profile />}/>
+      <Route path='/post/:postId' element={<PostPage user={user} username={username}/>}/>
    </Routes>
 
    </>
