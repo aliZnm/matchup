@@ -1,16 +1,22 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../firebase";
 import { collection, doc, getDocs, getDoc, query, where } from "firebase/firestore";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import ProfilePic from "../assets/default-avatar.jpg"
 import './Profile.css'
 import './PostCard.css'
-export default function Profile(){
+import { updateDoc } from "firebase/firestore";
+
+export default function Profile({currentUserUid}){
     const { uid } = useParams()
     const navigate = useNavigate()
     const [profileData, setProfileData] = useState(null);
     const [posts, setPosts] = useState([]);
-
+    const isOwnProfile = uid === currentUserUid
+    const [editingDescription , setEditingDescription] = useState(false);
+    const [descriptionInput, setDescriptionInput] = useState("");
+    
+    
     useEffect(() => {
         async function fetchProfile(){
             const userRef = doc(db, "users", uid)
@@ -31,7 +37,17 @@ export default function Profile(){
         fetchProfile()
         fetchPosts()
     }, [uid])
+
+    async function handleSaveDescription() {
+        await updateDoc(doc(db, "users", uid), {
+            description: descriptionInput
+        })    
+        setProfileData(prev => ({...prev, description: descriptionInput}))    
+        setEditingDescription(false);
+    }
+
     if(!profileData) return <h1>Loading..</h1>
+    
     return(
         <div className="profile-page">
             <div className="profile-card">
@@ -41,7 +57,31 @@ export default function Profile(){
                 </div>
                 <h1 className="profile-username">@{profileData?.username}</h1>
                 <p className="profile-joined">Member since {profileData?.createdAt ? new Date(profileData.createdAt.seconds * 1000).toLocaleDateString() : "Unknown"}</p>
-                <p className="profile-description">No description yet.</p>
+
+                {editingDescription
+                    ? <div className="edit-description">
+                        <textarea
+                        value={descriptionInput}
+                        onChange={(e) => setDescriptionInput(e.target.value)}
+                        placeholder="Write something about yourself..."
+                        />
+                        <div className="edit-btn-group">
+                            <button onClick={handleSaveDescription}>Save</button>
+                            <button onClick={() => setEditingDescription(false)}>Cancel</button>
+                        </div>
+                    </div>
+                    : <>
+                        <p className="profile-description">
+                            {profileData?.description || "No description"}
+                        </p>
+                        
+                        {isOwnProfile && <button className="edit-btn" onClick={() => {
+                            setDescriptionInput(profileData?.description || "")
+                            setEditingDescription(true)
+                        }}>Edit Description</button>}
+                        </>
+                }
+
             </div>
 
             <div className="profile-posts">

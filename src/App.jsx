@@ -63,7 +63,7 @@ export default function App() {
    <Navbar />
    <Routes>
       <Route path="/" element={<Feed user={user} username={username}/>} />
-      <Route path="/profile/:uid" element={<Profile />}/>
+      <Route path="/profile/:uid" element={<Profile currentUserUid={user?.uid}/>}/>
       <Route path='/post/:postId' element={<PostPage user={user} username={username}/>}/>
    </Routes>
 
