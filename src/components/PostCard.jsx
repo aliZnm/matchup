@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import FilledHeart from '../assets/filledHeart.png'
 import UnfilledHeart from '../assets/unfilledHeart.png'
 import Comments from '../assets/comments.png'
-
+import DefaultAvatar from '../assets/default-avatar.jpg'
 export default function PostCard(props){
 
     const [showMenu, setShowMenu] = useState(false);
@@ -42,6 +42,20 @@ export default function PostCard(props){
         deleteDoc(doc(db, "posts", props.id));
     }
 
+    function timeAgo(timestamp){
+        if(!timestamp) return ""
+        const now = new Date()
+        const postTime = new Date(timestamp.seconds*1000)
+        const diff = Math.floor((now-postTime)/1000)
+
+        if(diff < 60) return `${diff}s ago`
+        if(diff < 3600) return `${Math.floor(diff/60)}m ago`
+        if(diff < 86400) return `${Math.floor(diff/3600)}h ago`
+        if(diff < 2592000) return`${Math.floor(diff/86400)}d ago`
+        if(diff < 31536000) return `${Math.floor(diff / 2592000)}mo`
+        return `${Math.floor(diff / 31536000)}y`
+
+    }
 
     useEffect(() => {
         const unsubscribe = onSnapshot(
@@ -60,11 +74,15 @@ export default function PostCard(props){
     return(
         <div className="feed-container" onClick={() => setShowMenu(false)}>
             <div className="profile-info" onClick={() => naviagte(`/profile/${props.uid}`)}>
-                <img src={props.profilePic} />
+                <img src={props.profilePic || DefaultAvatar} />
                 <h2>{props.username}</h2>
             </div>
-            {props.uid === props.currentUserUid && 
-                <button onClick={(e) => {e.stopPropagation(); toggleShowMenu()}} className='menu-button'>⋮</button>}
+            <div className='post-header-right'>
+                    <span className='post-time'>{timeAgo(props.createdAt)}</span>
+                    {props.uid === props.currentUserUid && 
+                        <button onClick={(e) => {e.stopPropagation(); toggleShowMenu()}} className='menu-button'>⋮</button>}
+            </div>
+            
                 
             {showMenu &&
                 <div className='menu-btns-container'>
@@ -75,8 +93,8 @@ export default function PostCard(props){
                 <h1>{props.gameName}</h1>
                 <h2>Level {props.level}</h2>
                 <h2>Mic: {props.mic}</h2>
-                <h2>{props.gameUsername}</h2>
-                <h3>{props.date}</h3>
+                <h2>Username: {props.gameUsername}</h2>
+                
             </div>
             <div className='post-actions'>
                 <button onClick={handleLike} className='like-btn'>

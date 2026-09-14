@@ -43,7 +43,7 @@ export default function Feed({ user, username }){
       const postElements = filteredPosts.map((post, index) => {
         return  <PostCard 
         key={index}
-        profilePic={post.profilePic}
+        profilePic={post.profileURL}
         username={post.username}
         gameName={post.gameName}
         level={post.level}
@@ -55,6 +55,7 @@ export default function Feed({ user, username }){
         currentUserUid={user.uid}
         id={post.id}
         likes={post.likes}
+        createdAt={post.createdAt}
         />
       });
 
@@ -79,7 +80,6 @@ export default function Feed({ user, username }){
         <div className="feed-container-wrapper">
             <div className="tabs">
               <button className={activeTab === "explore" ? "active-tab" : ""} onClick={() => setActiveTab("explore")}>Explore</button>
-              <button className={activeTab === "friends" ? "active-tab" : ""} onClick={() => setActiveTab("friends")}>Friends</button>
               <button className={activeTab === "myPosts" ? "active-tab" : ""} onClick={() => setActiveTab("myPosts")}>My Posts</button>
             </div>
 

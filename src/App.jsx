@@ -12,12 +12,12 @@ import Profile from './components/Profile'
 import PostPage from './components/PostPage'
 
 export default function App() {
-  const [user, setUser] = useState({displayName: "Abdul"});
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [needsUsername, setNeedsUsername] = useState(false);
   const [username, setUsername] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
-
+  const [userPhotoURL, setUserPhotoURL] = useState("");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -28,6 +28,7 @@ export default function App() {
        
         if(userSnap.exists()){
           setUsername(userSnap.data().username)
+          setUserPhotoURL(userSnap.data().photoURL || "")
 
       
         }
@@ -60,7 +61,8 @@ export default function App() {
 
   return (
    <>
-   <Navbar />
+   <Navbar 
+   user={user}/>
    <Routes>
       <Route path="/" element={<Feed user={user} username={username}/>} />
       <Route path="/profile/:uid" element={<Profile currentUserUid={user?.uid}/>}/>

@@ -50,16 +50,7 @@
 
 
 
-.menu-button {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    font-size: 1.4rem;
-    cursor: pointer;
-}
+
 
 .menu-btns-container {
     position: absolute;
@@ -244,4 +235,27 @@
 
 .view-all-comments:hover {
     text-decoration: underline;
+}
+
+
+.post-header-right {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.menu-button {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0;
+}
+.post-time {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
 }

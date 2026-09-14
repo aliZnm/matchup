@@ -1,0 +1,218 @@
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg);
+}
+
+.animated-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+    animation: float 8s ease-in-out infinite;
+}
+
+.orb1 {
+    width: 400px;
+    height: 400px;
+    background-color: var(--accent);
+    top: -100px;
+    left: -100px;
+    animation-delay: 0s;
+}
+
+.orb2 {
+    width: 300px;
+    height: 300px;
+    background-color: #a78bfa;
+    bottom: -50px;
+    right: -50px;
+    animation-delay: 3s;
+}
+
+.orb3 {
+    width: 200px;
+    height: 200px;
+    background-color: var(--accent);
+    top: 50%;
+    left: 50%;
+    animation-delay: 5s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -30px) scale(1.05); }
+    66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+.login-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+    padding: 24px;
+    width: 100%;
+    max-width: 420px;
+}
+
+.login-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-logo {
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--accent);
+    letter-spacing: 4px;
+    text-shadow: 0 0 30px rgba(124, 92, 191, 0.8),
+                 0 0 60px rgba(124, 92, 191, 0.4),
+                 0 0 100px rgba(124, 92, 191, 0.2);
+}
+
+.login-tagline {
+    color: var(--text);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.login-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.login-card {
+    width: 100%;
+    background-color: rgba(26, 26, 36, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.login-card h2 {
+    color: var(--text);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: left;
+}
+
+.login-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 10px 14px;
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 0.95rem;
+}
+
+.login-card input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.login-card form button {
+    background-color: var(--accent);
+    color: var(--text);
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.95rem;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.or-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.or-text::before,
+.or-text::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: var(--border);
+}
+
+.google-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: var(--text);
+    color: #1a1a24;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.95rem;
+    width: 100%;
+    transition: opacity 0.2s;
+}
+
+.google-button:hover {
+    opacity: 0.9;
+}
+
+.google-button img {
+    width: 20px;
+    height: 20px;
+}
+
+.login-error {
+    color: #F08080;
+    font-size: 0.85rem;
+    text-align: left;
+}
+
+.login-switch {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.login-switch span {
+    color: var(--accent);
+    cursor: pointer;
+    font-weight: 600;
+    margin-left: 4px;
+}
+
+.login-switch span:hover {
+    text-decoration: underline;
+}
