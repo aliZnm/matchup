@@ -1,14 +1,24 @@
 import { useState } from "react";
 import { db } from "../firebase";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { doc, getDocs, setDoc, serverTimestamp, query, collection, where } from "firebase/firestore";
 import './CreateUsername.css'
 
 
 export default function CreateUsername({ user, setNeedsUsername, username }){
     const [usernameInput, setUsernameInput] = useState("");
-
+    const [error, setError] = useState("")
     async function handleSubmit(e) {
         e.preventDefault();
+        const usernameQuery = query(
+            collection(db, "users"),
+            where("username", "==", usernameInput)
+        )
+        const snapshot = await getDocs(usernameQuery)
+
+        if(!snapshot.empty){
+            setError("Username already taken!")
+            return
+        }
         await setDoc(doc(db, "users", user.uid), {
             username: usernameInput,
             email: user.email,
@@ -30,6 +40,7 @@ export default function CreateUsername({ user, setNeedsUsername, username }){
                         <span>@</span>
                         <input type="text" onChange={(e) => setUsernameInput(e.target.value)} placeholder="username" />
                     </div>
+                    {error && <p className="error-message">{error}</p>}
                   <button type="submit">
                     Continue
                  </button>

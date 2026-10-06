@@ -79,3 +79,9 @@
     color: var(--text);
     margin-top: 0;
 }
+
+.error-message{
+    color: #F08080 !important;
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
