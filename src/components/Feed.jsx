@@ -43,7 +43,7 @@ export default function Feed({ user, username }){
       const postElements = filteredPosts.map((post, index) => {
         return  <PostCard 
         key={index}
-        profilePic={post.profileURL}
+        profilePic={post.photoURL}
         username={post.username}
         gameName={post.gameName}
         level={post.level}
@@ -86,7 +86,7 @@ export default function Feed({ user, username }){
              <div className="feed">
                {activeTab === "myPosts" && filteredPosts.length === 0
                ? <p className="no-posts-text">You haven't made any posts yet.</p>
-                : postElements}
+               : postElements}
             </div>
 
         </div>

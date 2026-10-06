@@ -103,7 +103,7 @@ export default function PostCard(props){
                 </button>
                 <button onClick={(e) => {e.stopPropagation(); naviagte(`/post/${props.id}`)}} className='comments-btn'>
                     <img src={Comments} alt="comments" />
-                    {props.commentCount || 0}
+                    {comments.length}
                 </button>
             </div>
 

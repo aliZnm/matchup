@@ -22,6 +22,7 @@ export default function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+      setUsername("");
       if(currentUser){
         const userRef = doc(db, "users", currentUser.uid);
         const userSnap = await getDoc(userRef);
