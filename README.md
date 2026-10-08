@@ -9,16 +9,16 @@ A real-time social platform for gamers to find teammates, post LFG (Looking for 
 ## Screenshots
 
 ### Login
-![Login Page](screenshots/login.png)
+<img src="screenshots/login.png" width="600"/>
 
 ### Feed
-![Feed](screenshots/feed.png)
+<img src="screenshots/feed.png" width="600"/>
 
 ### Post & Comments
-![Post Page](screenshots/post.png)
+<img src="screenshots/post.png" width="600"/>
 
 ### Profile
-![Profile Page](screenshots/profile.png)
+<img src="screenshots/profile.png" width="600"/>
 
 ---
 
