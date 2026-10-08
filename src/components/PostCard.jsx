@@ -69,7 +69,7 @@ export default function PostCard(props){
             }
         )
         return unsubscribe
-    }, [])
+    }, [props.id])
 
     return(
         <div className="feed-container" onClick={() => setShowMenu(false)}>
@@ -109,8 +109,8 @@ export default function PostCard(props){
 
 
             <div className='comments-list'>
-                {comments.slice(0, 3).map((comment, index) => (
-                    <div key={index} className='comment-item'>
+                {comments.slice(0, 3).map((comment) => (
+                    <div key={comment.id} className='comment-item'>
                         <span className='comment-username'>@{comment.username}</span>
                         <p>{comment.text}</p>
                     </div>

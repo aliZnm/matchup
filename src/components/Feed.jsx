@@ -41,8 +41,8 @@ export default function Feed({ user, username }){
 
 
       const postElements = filteredPosts.map((post, index) => {
-        return  <PostCard 
-        key={index}
+        return  <PostCard
+        key={post.id}
         profilePic={post.photoURL}
         username={post.username}
         gameName={post.gameName}

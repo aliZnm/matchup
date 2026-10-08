@@ -75,8 +75,8 @@ export default function PostPage({ user, username }){
             <div className="comments-section">
                 {comments.length === 0 
                     ? <p className="no-comments">No comments yet</p>
-                    : comments.map((comment, index) => (
-                        <div key={index} className="comment-item">
+                    : comments.map((comment) => (
+                        <div key={comment.id} className="comment-item">
                             <div className='comment-profile'>
                                 <img src={comment.photoURL || ProfilePic} alt="profile" />
                                 <span className="comment-username">@{comment.username}</span>
