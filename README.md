@@ -2,7 +2,7 @@
 
 A real-time social platform for gamers to find teammates, post LFG (Looking for Group) requests, and connect with players across any game.
 
-**Live Demo:** [https://matchup-gaming.vercel.app/profile/OovFb2zLKSeQBPa7XkYMGjieRm33]
+**Live Demo:** [https://matchup-gaming.vercel.app/]
 
 ---
 
